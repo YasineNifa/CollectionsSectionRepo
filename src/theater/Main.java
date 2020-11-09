@@ -16,6 +16,10 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         Theater theatre = new Theater("YassineHero", 8,12);
+
+
+
+
         // To copy a list in a list using shallow copy, So what that does is creates an array list containing all the elements from the list
         //that were passed to the constructor,
         // The two list share the same memory space
@@ -29,9 +33,9 @@ public class Main {
         printlist(copyList);*/
 
         //Deep Copy
-        ArrayList<Theater.Seat> cop = new ArrayList<>(theatre.seats.size());
+        /*ArrayList<Theater.Seat> cop = new ArrayList<>(theatre.seats.size());
         cop.add(theatre.seats.get(0));
-        Collections.copy(cop,theatre.seats);
+        Collections.copy(cop,theatre.seats);*/
 
 
 
@@ -65,17 +69,50 @@ public class Main {
             System.out.println("Pay this Place");
         }else{
             System.out.println("The seat is reserved by another person");
-        }*/
+        }
 
-        /*if(theatre.reserveSeat("A09")){
+        if(theatre.reserveSeat("A09")){
             System.out.println("Pay this Place");
         }else{
             System.out.println("Sorry the seat is reserved by another person");
         }*/
+
+        // COMPARATOR
+        ArrayList<Theater.Seat> liste = new ArrayList<>(theatre.seats);
+        printlist(liste);
+        System.out.println("Sorted liste");
+        Collections.sort(liste,theatre.ORDER_PRICE);
+        printlist(liste);
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void printlist(List<Theater.Seat> liste){
         for(Theater.Seat s: liste){
-            System.out.print(s.getSeatNumber()+" ");
+            System.out.print(s.getSeatNumber()+" $" + s.getPrice() + " ");
         }
         System.out.println();
     }

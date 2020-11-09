@@ -11,13 +11,35 @@ public class Theater {
     //private Collection<Seat> seats = new HashSet<>();
     //private Collection<Seat> seats = new LinkedHashSet<>();
     public List<Seat> seats = new ArrayList<>();
+    static final Comparator<Seat> ORDER_PRICE = new Comparator<Seat>() {
+        @Override
+        public int compare(Seat seat1, Seat seat2) {
+            if(seat1.getPrice() < seat2.getPrice()){
+                return -1;
+            }else if(seat1.getPrice() > seat2.getPrice()){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    };
     public Theater(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
-
         int lastRow = 'A' + (numRows - 1);
+        double price = 12;
         for (char row = 'A'; row <= lastRow; row++) {
             for (int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
-                Seat seat = new Seat(row + String.format("%02d", seatNum));
+                if(row <= 'D'){
+                    if(4 <= seatNum && seatNum <= 9){
+                        price = 14;
+                    }
+                    else {
+                        price = 12;
+                    }
+                }else{
+                    price = 7;
+                    }
+                Seat seat = new Seat(row + String.format("%02d", seatNum),price);
                 seats.add(seat);
             }
         }
@@ -31,7 +53,7 @@ public class Theater {
 
         // Now I will use Collections.binarysearch
         //Collections.binarySearch()
-        Seat requestedSeat = new Seat(seatNumber);
+        Seat requestedSeat = new Seat(seatNumber,12);
         int index = Collections.binarySearch(seats,requestedSeat);
         if(index >= 0){
             return seats.get(index).reserve();
@@ -64,15 +86,27 @@ public class Theater {
             System.out.println(seat.getSeatNumber());
         }
     }
+
+
+
+
 // private to public
     public class Seat implements Comparable<Seat>{
         private final String seatNumber;
         private boolean reserved = false;
+        private double price;
 
+    public double getPrice() {
+        return price;
+    }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-        public Seat(String seatNumber) {
+    public Seat(String seatNumber, double price) {
             this.seatNumber = seatNumber;
+            this.price = price;
         }
 
         public boolean reserve() {
