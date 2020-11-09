@@ -10,7 +10,7 @@ public class Theater {
     //private Collection<Seat> seats = new LinkedList<>();
     //private Collection<Seat> seats = new HashSet<>();
     //private Collection<Seat> seats = new LinkedHashSet<>();
-    private List<Seat> seats = new ArrayList<>();
+    public List<Seat> seats = new ArrayList<>();
     public Theater(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
 
@@ -64,8 +64,8 @@ public class Theater {
             System.out.println(seat.getSeatNumber());
         }
     }
-
-    private class Seat implements Comparable<Seat>{
+// private to public
+    public class Seat implements Comparable<Seat>{
         private final String seatNumber;
         private boolean reserved = false;
 
