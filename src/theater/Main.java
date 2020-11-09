@@ -17,9 +17,5 @@ public class Main {
         }else{
             System.out.println("Sorry the seat is reserved by another person");
         }
-
-
-
-
     }
 }

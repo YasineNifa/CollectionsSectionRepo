@@ -1,11 +1,15 @@
 package theater;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Theater {
     private final String theatreName;
-    private List<Seat> seats = new ArrayList<>();
+    //List -> Collection
+    // Change ArrayList to different collection's classes to see the difference
+    //private Collection<Seat> seats = new ArrayList<>();
+    //private Collection<Seat> seats = new LinkedList<>();
+    //private Collection<Seat> seats = new HashSet<>();
+    private Collection<Seat> seats = new LinkedHashSet<>();
 
     public Theater(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
